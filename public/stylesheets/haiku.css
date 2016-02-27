@@ -1,0 +1,308 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: “Times New Roman”, “游明朝”, YuMincho, “ヒラギノ明朝 ProN W3″, “Hiragino Mincho ProN”, "MS 明朝", serif;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  /* 背景が画像を挿入していますが、色でもOK */
+  background-image: url("/images/haiku-back.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+}
+
+/* 左サイドバーの設定 */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: #FFF;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+}
+header:hover {
+  transition: 0.5s linear all;
+  background-color: #7a4171;
+}
+header:hover a {
+  transition: 0.5s linear all;
+  color: #FFF;
+}
+header h1 {
+  text-align: center;
+}
+header a {
+  height: 46px;
+  padding-top: 4px;
+  display: block;
+  font-size: 23px;
+  width: 100%;
+  text-decoration: none;
+  /* 古代紫 こだいむらさき */
+  color: #895b8a;
+}
+
+/* コンテンツのスタイル */
+main article span, main article p {
+  /* IE */
+  writing-mode: tb-rl;
+  writing-mode: vertical-rl;
+  -moz-writing-mode: vertical-rl;
+  -o-writing-mode: vertical-rl;
+  -webkit-writing-mode: vertical-rl;
+}
+
+main {
+  position: relative;
+  top: 80px;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 90%;
+  z-index: 10;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: space-between;
+  align-content: space-between;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+}
+main article {
+  /* 1つ1つの投稿のスタイル */
+  /* 背景色 デフォルトは黒の透明度0.7 */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* 文字色 デフォルトは白 */
+  color: #EEE;
+  font-weight: normal;
+  /* 記事の影 box-shadow */
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  max-width: 30%;
+  height: 550px;
+  padding: 20px 10px;
+  margin-bottom: 70px;
+  position: relative;
+  -webkit-flex-basis: 33%;
+  flex-basis: 33%;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  /* FlEX BOXの親要素 */
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: space-between;
+  align-content: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+main article span {
+  /* 投稿された短歌の文字サイズと、行間のスタイル */
+  -webkit-flex-basis: 15%;
+  flex-basis: 15%;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  font-size: 23px;
+}
+main article span:nth-child(2) {
+  /* 字下げ */
+  padding-top: 1.1em;
+}
+main article span:nth-child(3) {
+  /* 字下げ */
+  padding-top: 2.1em;
+}
+main article span:nth-child(4) {
+  /* 字下げ */
+  padding-top: 4.1em;
+}
+main article span:nth-child(5) {
+  /* 字下げ */
+  padding-top: 5.1em;
+}
+main article p {
+  /* 作者の文字列のスタイル */
+  float: left;
+  text-align: right;
+  height: 100%;
+}
+main article .edit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+main article .edit form {
+  text-align: center;
+}
+main article .edit form input[type=submit] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  color: #FFF;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  display: block;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+main article .edit form input[type=submit]:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #222;
+  cursor: pointer;
+}
+
+/* =====================================
+   ここから下はあまりいじらないほうがいいところ
+   ===================================== */
+/* モーダルビュー時にウィンドウ全体を覆うための設定 */
+#modal-view, #modal-view .close {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* モーダルビューの設定 */
+#modal-view {
+  display: none;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+}
+#modal-view .form-box {
+  /* 投稿画面のデザイン */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 600px;
+  margin-left: -200px;
+  margin-top: -315px;
+  padding: 20px;
+  background: white;
+  border-radius: 7px;
+}
+#modal-view .form-box h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+#modal-view .form-box form {
+  /* ここからフォームの設定 */
+  width: 100%;
+  /* ここまでフォームのスタイル */
+}
+#modal-view .form-box form input[type=text] {
+  /* テキストボックスのデザイン */
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  font-size: 18px;
+  box-shadow: none;
+}
+#modal-view .form-box form input[type=text]:focus {
+  /* テキストボックスにフォーカス（選択）した時の設定 */
+  background-color: rgba(255, 255, 0, 0.3);
+}
+#modal-view .form-box form input[type=submit] {
+  /* 投稿ボタン(submit)のデザイン */
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 auto;
+  border: 2px solid #CCC;
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  background-color: #FFF;
+}
+#modal-view .form-box form input[type=submit]:hover {
+  background-color: rgba(255, 255, 0, 0.3);
+  cursor: pointer;
+}
+
+/* 編集画面 */
+.edit-view {
+  /* 編集ページ場合は強制的にdisplayを表示させる。 */
+  display: block !important;
+}
+
+/* URLがindex.html#modal-viewの時のスタイル */
+#modal-view:target {
+  display: block;
+  -webkit-animation-name: FadeIn;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: 1;
+  opacity: 1;
+}
+
+/* モーダルビューを消す場所のスタイル */
+#close-area {
+  background: rbga(0, 0, 0, 0.5);
+}
+
+body {
+  -webkit-animation-name: FadeIn;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: 1;
+  opacity: 1;
+}
+
+/* アニメーションの設定 */
+@-webkit-keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media only screen and (max-width: 960px) {
+  main {
+    width: 100%;
+  }
+
+  main article {
+    max-width: 40%;
+    -webkit-flex-basis: 40%;
+    flex-basis: 40%;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+  }
+}
+@media only screen and (max-width: 600px) {
+  main article {
+    max-width: 100%;
+    margin: 0 10% 60px 10%;
+    -webkit-flex-basis: 80%;
+    flex-basis: 80%;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+  }
+
+  #modal-view .form-box {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+}
+/* Created by Kosei Himeno. Last Update 2015 June */

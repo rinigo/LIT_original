@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>TOP</title>
+</head>
+<body>
+    <% unless session[:user].present? %>
+    <a href="/signin">ログイン</a> <a href="/signup">新規登録</a><br>
+    <h2>未ログイン</h2>
+    <% else %>
+        <a href="/signout">ログアウト</a>
+        <h2><%= Contribution.find(session[:user]).mail %>としてログイン</h2>
+    <% end %>
+    
+    
+    
+    <ul>
+        <% @contents.each do |content| %>
+        <li>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= content.url %>" frameborder="0" allowfullscreen></iframe>
+            <p><%= content.name %></p>
+            <p><%= content.title %></p>
+            <p><%= content.body %></p>
+        </li>
+        <% end %>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+    <header>
+      <a href="/">HOME</a>   
+    </header>
+    <a href="/user/upload">Upload</a>
+    <!-- アップロードへ飛ばす -->
+    
+   
+    <p><%= @user.mail %></p>
+   
+    <!--　ログインしてるアカウントのEmailを出す -->
+     <ul>
+        <% @contents.each do |content| %>
+        <li>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= content.url %>" frameborder="0" allowfullscreen></iframe>
+            <!-- 本当はURLから動画番号引っ張ってきて表示させたい -->
+            <p><%= content.name %></p>
+            <p><%= content.title %></p>
+            <p><%= content.body %></p>
+            <span>
+                <form action="/user/delete/:<%= content.id %>" method="post">
+                    <input type="submit" value="削除">
+                </form>
+            </span>
+            <span>
+                <form action="/user/edit/:<%= content.id %>"method="post">
+                    <input type="submit" value="編集">
+                </form>
+            </span>
+        </li>
+        <% end %>
+    </ul>
+</body>
