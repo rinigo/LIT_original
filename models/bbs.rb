@@ -3,6 +3,7 @@ ActiveRecord::Base.establish_connection(
 
 class Contribution < ActiveRecord::Base
   belongs_to :user
+  validates :user, presence: true
 end
 
 class User < ActiveRecord::Base
