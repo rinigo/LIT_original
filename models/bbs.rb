@@ -4,6 +4,11 @@ ActiveRecord::Base.establish_connection(
 class Contribution < ActiveRecord::Base
   belongs_to :user
   validates :user, presence: true
+  
+  # class method
+  def self.categories 
+    Contribution.all.pluck(:category).select{|category| !category.nil?}.uniq
+  end
 end
 
 class User < ActiveRecord::Base
