@@ -19,12 +19,17 @@ GEM
     backports (3.6.8)
     bcrypt (3.1.10)
     builder (3.2.2)
+    byebug (8.2.2)
     cloudinary (1.1.2)
       aws_cf_signer
       rest-client
     domain_name (0.5.20160128)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.1.0)
+    hirb (0.7.3)
+    hirb-unicode (0.0.5)
+      hirb (~> 0.5)
+      unicode-display_width (~> 0.1.1)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -69,6 +74,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    unicode-display_width (0.1.1)
 
 PLATFORMS
   ruby
@@ -76,8 +82,11 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bcrypt
+  byebug
   cloudinary
   dotenv
+  hirb
+  hirb-unicode
   nokogiri
   pg
   rake
