@@ -12,17 +12,29 @@
     <!-- アップロードへ飛ばす -->
     
    
-    <p><%= @user.mail %></p>
-   
+    <p><%= @user.mail %>でログインしています</p>
     <!--　ログインしてるアカウントのEmailを出す -->
+        <ul>
+        <% @categories.each do |category| %>
+    <li><a href="/user/category/<%= category.id %>"><%= category.name %></a></li>
+        <% end%>
+    </ul>
+    
+    <% if @category_name.present? %>
+        <h2><%= @category_name %></h2>
+    <% end %>
+    
+     <!-- ここでカテゴリー出す -->
+    
      <ul>
         <% @contents.each do |content| %>
         <li>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= content.url %>" frameborder="0" allowfullscreen></iframe>
             <!-- 本当はURLから動画番号引っ張ってきて表示させたい -->
-            <p><%= content.name %></p>
             <p><%= content.title %></p>
             <p><%= content.body %></p>
+            <p><%= content.category.name %></p>
+           
             <span>
                 <form action="/user/delete/:<%= content.id %>" method="post">
                     <input type="submit" value="削除">

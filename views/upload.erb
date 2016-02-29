@@ -5,11 +5,15 @@
     <title>Upload</title>
 </head>
 <body>
-  <form action="/user/new" method="post">
+  <form action="/user/upload/:id" method="post">
         <p>動画ID:<input type="text" name="url"></p>
-        <p>ユーザー名:<input type="text" name="name"></p>
         <p>動画のタイトル:<input type="text" name="title"></p>
         <p>動画へのコメント:<input type="text" name="body"></p>
+        <select name="category" id="category">
+          <% @categories.each do |category| %>
+            <option value="<%= category.id %>"><%= category.name %></option>
+          <% end%>
+        </select>    
         <p><input type="submit" value="投稿"></p>
     </form>
     
