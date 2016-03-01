@@ -15,8 +15,8 @@ get '/' do
     erb :index
 end
 
-get '/category/:id' do
-    @contents = Contribution.where(category:'id')
+get '/category/:name' do
+    @contents = Contribution.where(category: params[:name])
     erb :category
 end
 
@@ -65,12 +65,12 @@ end
 
 get '/user/account' do
     @contents = @user.contributions.order('id desc').all
-    @categories = Contribution.categories
+    @categories = @user.contributions.categories
     erb :account    
 end
 
-get '/user/category/:id' do
-    @contents = Contribution.where(category:'id')
+get '/user/category/:name' do
+    @contents = @user.contributions.where(category: params[:name])
     erb :user_category
   
 end

@@ -7,7 +7,7 @@ class Contribution < ActiveRecord::Base
   
   # class method
   def self.categories 
-    Contribution.all.pluck(:category).select{|category| !category.nil?}.uniq
+    pluck(:category).select{|category| !category.nil?}.uniq
   end
 end
 
