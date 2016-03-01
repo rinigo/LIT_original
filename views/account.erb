@@ -8,20 +8,23 @@
     <header>
       <a href="/">HOME</a>   
     </header>
-    <a href="/user/upload/@user.id">Upload</a>
+    <a href="/user/upload">Upload</a>
     <!-- アップロードへ飛ばす -->
     
    
     <p><%= @user.mail %>でログインしています</p>
     <!--　ログインしてるアカウントのEmailを出す -->
-        <ul>
+    <h1>カテゴリ一覧</h1>
+    <ul>
         <% @categories.each do |category| %>
-    <li><a href="/user/category/<%= category.id %>"><%= category.name %></a></li>
+            <li>
+                <a href="/user/category/<%= category %>"><%= category %></a>
+            </li>
         <% end%>
     </ul>
     
      <!-- ここでカテゴリー出す -->
-    
+    <h1>動画一覧</h1>
      <ul>
         <% @contents.each do |content| %>
         <li>
@@ -32,14 +35,12 @@
             <p><%= content.category %></p>
            
             <span>
-                <form action="/user/delete/:<%= content.id %>" method="post">
+                <form action="/user/delete/<%= content.id %>" method="post">
                     <input type="submit" value="削除">
                 </form>
             </span>
             <span>
-                <form action="/user/edit/:<%= content.id %>"method="post">
-                    <input type="submit" value="編集">
-                </form>
+                <a href="/user/edit/<%= content.id %>">編集</a>
             </span>
         </li>
         <% end %>

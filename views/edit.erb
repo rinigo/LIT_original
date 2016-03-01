@@ -5,7 +5,7 @@
     <title>EDIT</title>
 </head>
 <body>
-    <form action="user/renew/<%= @content.id %>" method="post">
+    <form action="/user/renew/<%= @content.id %>" method="post">
         <p>動画ID:<input type="text" name="url" value="<%= @content.url %>"></p>
         <p>動画のタイトル:<input type="text" name="title" value="<%= @content.title %>"></p>
         <p>動画へのコメント:<input type="text" name="body" value="<%= @content.body %>"></p>

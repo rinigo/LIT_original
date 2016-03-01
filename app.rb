@@ -75,43 +75,41 @@ get '/user/category/:id' do
   
 end
 
-get '/user/upload/:id' do
+get '/user/upload' do
     erb :upload
 end
 
-post '/user/upload/:id' do
-     @contribution = Contribution.create({
+post '/user/upload' do
+     @contribution = @user.contributions.create({
          url: params[:url],
-       title: params[:title],
+         title: params[:title],
          body: params[:body],
          category: params[:category]
      })
 
     logger.info @contribution
     logger.info @contribution.errors
-    
-
-
-    redirect '/user/account/:id'
+    redirect '/user/account'
 end
 
 post '/user/delete/:id' do
-    Contribution.find(params[:id]).destroy
+    @user.contributions.find(params[:id]).destroy
     redirect '/user/account/#{@user}'
 end
 
 get '/user/edit/:id' do
-    @content = Contribution.find(params[:id])
+    @content = @user.contributions.find(params[:id])
     erb :edit
 end
 
 post '/user/renew/:id' do
-    @content = Contribution.find(params[:id])
+    @content = @user.contributions.find(params[:id])
     @content.update({
-        url: params[url],
+        url: params[:url],
         title: params[:title],
-        body: params[:body]
+        body: params[:body],
+        category: params[:category]
     })
-    redirect '/user/account/#{@user}'
+    redirect '/user/account'
 end
 
