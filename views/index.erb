@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>TOP</title>
-</head>
-<body>
+
     <% if session[:user].present? %>
         <a href="/user/account">アカウントページ</a>
     <% else %>
@@ -30,5 +24,3 @@
         </li>
         <% end %>
     </ul>
-</body>
-</html>
