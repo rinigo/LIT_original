@@ -5,21 +5,16 @@
     <title>TOP</title>
 </head>
 <body>
-    <% unless session[:user].present? %>
+    <% if session[:user].present? %>
+        <a href="/user/account">アカウントページ</a>
+    <% else %>
+        <a href="/signin">ログイン</a> <a href="/signup">新規登録</a><br>
     <% end %>
-    <a href="/signin">ログイン</a> <a href="/signup">新規登録</a><br>
-
-    
-    <ul>
-        <% @categories.each do |category| %>
+<ul>
+    <% @categories.each do |category| %>
         <li><a href="/category/<%= category.id %>"><%= category.name %></a></li>
-        <% end%>
-    </ul>
-    
-    <% if @category_name.present? %>
-        <h2><%= @category_name %></h2>
-    <% end %>
-    
+     <% end %>
+</ul>
      <!-- ここでカテゴリー出す -->
     
     <ul>
@@ -28,7 +23,7 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= content.url %>" frameborder="0" allowfullscreen></iframe>
             <p><%= content.title %></p>
             <p><%= content.body %></p>
-            <p><%= content.category.name %></p>
+            <p><%= content.category %></p>
         </li>
         <% end %>
     </ul>

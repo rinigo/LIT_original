@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Category_Page</title>
+</head>
+<body>
+     <header>
+      <a href="/">HOME</a>   
+    </header>
+      <ul>
+        <% @contents.each do |content| %>
+        <li>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= content.url %>" frameborder="0" allowfullscreen></iframe>
+            <p><%= content.title %></p>
+            <p><%= content.body %></p>
+            <p><%= content.category %></p>
+        </li>
+        <% end %>
+    </ul>
+    
+</body>

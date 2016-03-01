@@ -10,18 +10,14 @@ enable :sessions
 
 get '/' do
     @contents = Contribution.order('id desc').all
-    @categories = Category.all
+    @categories = Contribution.categories
     
     erb :index
 end
 
 get '/category/:id' do
-    @categories = Category.all
-    @category = Category.find(params[:id])
-    @category_name = @category.name
-    @contents = @category.contributions
-    
-    redirect '/'
+    @contents = Contribution.where(category:'id')
+    erb :category
 end
 
 get '/signin' do
@@ -40,7 +36,6 @@ post '/signin' do
 end
 
 get '/signup' do
-    # @contents = Contribution.order('id desc').all
     erb :sign_up
 end
 
@@ -52,10 +47,7 @@ post '/signup' do
         session[:user] = @user.id
     end
     
-    # @contents = Contribution.order('id desc').all
-    # erb :account
-
-    redirect "/user/account/#{@user.id}"
+    redirect '/user/account/:id'
 end
 
 
@@ -71,29 +63,19 @@ before '/user/*' do
     @user = User.find(@user_id)
 end
 
-get '/user/account/:id' do
-    #@contents = Contribution.order('id desc').all
-    #@contents = User.all
-    #@content = User.find(params[:id]
-    @categories = Category.all
-    @contents = User.all
-    
-    
+get '/user/account' do
+    @contents = @user.contributions.order('id desc').all
+    @categories = Contribution.categories
     erb :account    
 end
 
-get '/user/account/:uid/category/:cid' do
-    @category = Category.find(params[:id])
-    @contents = @category.contributions
-    #@contents = Contribution.order('id desc').all
-    #@categories = Category.all
-    #@category = Category.find_by(id: params[:cid])
-
-    erb :account    
+get '/user/category/:id' do
+    @contents = Contribution.where(category:'id')
+    erb :user_category
+  
 end
 
-get '/user/upload' do
-    @categories = Category.all
+get '/user/upload/:id' do
     erb :upload
 end
 
@@ -102,27 +84,20 @@ post '/user/upload/:id' do
          url: params[:url],
        title: params[:title],
          body: params[:body],
-         category_id: params[:category]
+         category: params[:category]
      })
 
-   # @contribution = Contribution.create({
-        # url: @content.url,
-        #title: @content.title,
-        #body: @content.body,
-        #password: @user.password,
-        #password_confirmation: @user.password_confirmation
-    #})
     logger.info @contribution
     logger.info @contribution.errors
     
 
 
-    redirect "/user/account/#{@user.id}"
+    redirect '/user/account/:id'
 end
 
 post '/user/delete/:id' do
     Contribution.find(params[:id]).destroy
-    redirect '/user/account/#{@user.id}'
+    redirect '/user/account/#{@user}'
 end
 
 get '/user/edit/:id' do
@@ -137,16 +112,6 @@ post '/user/renew/:id' do
         title: params[:title],
         body: params[:body]
     })
-    redirect '/user/account/#{@user.id}'
+    redirect '/user/account/#{@user}'
 end
 
-get '/user/category/:id' do
-    @category = Category.find(params[:id])
-    @contents = @category.contributions
-    #@categories = Category.all
-    #@category = Category.find(params[:id])
-    #@category_name = @category.name
-    #@contents = @category.contributions
-    
-    redirect "/user/account/#{session[:user]}/category/#{params[:id]}"
-end

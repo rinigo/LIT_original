@@ -10,10 +10,12 @@
         <p>動画のタイトル:<input type="text" name="title"></p>
         <p>動画へのコメント:<input type="text" name="body"></p>
         <select name="category" id="category">
-          <% @categories.each do |category| %>
-            <option value="<%= category.id %>"><%= category.name %></option>
-          <% end%>
-        </select>    
+          <option value="Stand-up">Stand-Up</option>
+          <option value="Solo">Solo</option>
+          <option value="Manzai">Manzai</option>
+          <option value="Skit">Skit</option>
+          <option value="Tv-Show">Tv-Show</option>
+        </select>
         <p><input type="submit" value="投稿"></p>
     </form>
     
