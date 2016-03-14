@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>EDIT</title>
-</head>
-<body>
     <form action="/user/renew/<%= @content.id %>" method="post">
         <p>動画ID:<input type="text" name="url" value="<%= @content.url %>"></p>
         <p>動画のタイトル:<input type="text" name="title" value="<%= @content.title %>"></p>
@@ -18,5 +11,3 @@
         </select>
         <p><input type="submit" value="編集完了"></p>
     </form>
-</body>
-</html>

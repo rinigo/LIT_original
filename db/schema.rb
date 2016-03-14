@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229115731) do
+ActiveRecord::Schema.define(version: 20160308021513) do
 
   create_table "contributions", force: :cascade do |t|
     t.string   "body"
     t.string   "url"
     t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "category"
     t.integer  "user_id"
+    t.integer  "good",       default: 0
   end
 
   create_table "users", force: :cascade do |t|

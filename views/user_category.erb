@@ -1,22 +1,67 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>Category_Page</title>
-</head>
-<body>
-     <header>
-      <a href="/">HOME</a>   
-    </header>
-      <ul>
-        <% @contents.each do |content| %>
-        <li>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= content.url %>" frameborder="0" allowfullscreen></iframe>
-            <p><%= content.title %></p>
-            <p><%= content.body %></p>
-            <p><%= content.category %></p>
-        </li>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">J-Comedy</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/user/account">Account</a></li>
+        <li><a href="/signout">Sign out</a></li>
+        
+     
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/user/upload">Upload</a></li>
+        <li><a>Login as <%= @user.mail %></a></li>
+        <li><a>Videos</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+ 
+        <% @contents.each_with_index do |content, i| %>
+        <% if i % 3 == 0 %>
+        <div class="row">
         <% end %>
-    </ul>
-    
-</body>
+            
+         <div class="col-md-3">
+            <iframe width="270" height="167" src="https://www.youtube.com/embed/<%= content.url %>" frameborder="0" allowfullscreen></iframe>
+            <h2><%= content.title %></h2>
+            <p><%= content.body %></p>
+            <p><span class="label label-default"><%= content.category %></span></p>
+                <span>
+                <form action="/user/delete/<%= content.id %>" method="post">
+                    <input type="submit" value="Delete">
+                </form>
+            </span>
+            <span>
+                <form action="/user/edit/<%= content.id %>" method="get">
+                  <input type="submit" value="Edit">
+                </form>
+            </span>
+        </div>
+        <div class="col-md-1">
+        </div>
+        <% if i % 3 == 2 %>
+        </div>
+        <% end %>
+        <% end %>
+        <% if @contents.size % 3 != 0 %>
+        </div>
+        <% end %>
+      
+    </div>
+    </div>
+    </div>
+
+  

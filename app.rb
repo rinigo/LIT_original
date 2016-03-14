@@ -2,6 +2,7 @@ require 'bundler/setup'
 Bundler.require
 require 'sinatra/reloader' if development?
 require 'open-uri'
+require 'byebug'
 require 'sinatra/json'
 require './image_uploader.rb'
 require './models/bbs.rb'
@@ -13,6 +14,15 @@ get '/' do
     @categories = Contribution.categories
     
     erb :index
+end
+
+post '/good/:id' do
+    @content = Contribution.find(params[:id])
+    good = @content.good
+    @content.update({
+        good: good + 1
+    })
+    redirect '/'
 end
 
 get '/category/:name' do
@@ -31,7 +41,7 @@ post '/signin' do
     if @user && @user.authenticate(params[:password])
         session[:user] = @user.id
     end
-    redirect '/user/account/:id'
+    redirect '/user/account'
     
 end
 
@@ -47,7 +57,7 @@ post '/signup' do
         session[:user] = @user.id
     end
     
-    redirect '/user/account/:id'
+    redirect '/user/account'
 end
 
 
@@ -94,7 +104,7 @@ end
 
 post '/user/delete/:id' do
     @user.contributions.find(params[:id]).destroy
-    redirect '/user/account/#{@user}'
+    redirect '/user/account'
 end
 
 get '/user/edit/:id' do
