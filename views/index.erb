@@ -42,7 +42,7 @@
 
 <div class="container">
   <% @contents.each_with_index do |content, i| %>
-    <div class="col-sm-4">
+    <div class="col-sm-4 content-item">
       <iframe width="270" height="167" src="https://www.youtube.com/embed/<%= content.url %>" frameborder="0" allowfullscreen></iframe>
       <h2><%= content.title %></h2>
       <p><%= content.body %></p>

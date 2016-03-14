@@ -10,3 +10,7 @@ iframe {
 .inline-form {
     display: inline;
 }
+
+.content-item {
+    margin-bottom: 30px;
+}
