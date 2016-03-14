@@ -7,3 +7,6 @@ iframe {
     height: auto;
 }
 
+.inline-form {
+    display: inline;
+}
